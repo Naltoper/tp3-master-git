@@ -66,20 +66,23 @@ public class Main {
         // TODO ou bien parametriser à l'aide de la ligne de commande (avec les argv)
         // TODO faire une classe option pour ne pas voir de switch
 
-        // non random BFS
-        ArrayList<Arc> randomArcTree0 =
-                BreadthFirstSearch.generateTree(graph, new Random().nextInt(graph.order + 1));
+        
+        ArrayList<Arc> randomArcTree;
 
         // random BFS
-        ArrayList<Arc> randomArcTree1 =
-                RandomBreadthFirstSearch.generateTree(graph, new Random().nextInt(graph.order + 1));
-
         if(argv.length > 0 && argv[0].equals("-a")){
             System.out.println("OOOOOOOOOOOOOOOOOO");
+            randomArcTree =
+                RandomBreadthFirstSearch.generateTree(graph, new Random().nextInt(graph.order + 1));
+        }
+        // non random BFS
+        else {
+            randomArcTree =
+                BreadthFirstSearch.generateTree(graph, new Random().nextInt(graph.order + 1));
         }
 
         randomTree = new ArrayList<>();
-        for (Arc a : randomArcTree1) randomTree.add(a.support);
+        for (Arc a : randomArcTree) randomTree.add(a.support);
         return randomTree;
     }
 
