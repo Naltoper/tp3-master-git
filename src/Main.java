@@ -21,10 +21,6 @@ public class Main {
 
     public static void main(String argv[]) throws InterruptedException {
 
-        if (argv.length > 0 && argv[0].equals("-a")) {
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAA");
-        }
-
         Graph graph = chooseFromGraphFamily();
         ArrayList<Edge> randomTree = null;
 
@@ -62,8 +58,8 @@ public class Main {
     public static ArrayList<Edge> genTree(Graph graph, String argv[]) {
         ArrayList<Edge> randomTree;
 
-        // TOOO : modifier l'algorithme utilisé ici
-        // TODO ou bien parametriser à l'aide de la ligne de commande (avec les argv)
+        // modifier l'algorithme utilisé ici
+        // ou bien parametriser à l'aide de la ligne de commande (avec les argv)
         // TODO faire une classe option pour ne pas voir de switch
 
         
@@ -71,7 +67,6 @@ public class Main {
 
         // random BFS
         if(argv.length > 0 && argv[0].equals("-a")){
-            System.out.println("OOOOOOOOOOOOOOOOOO");
             randomArcTree =
                 RandomBreadthFirstSearch.generateTree(graph, new Random().nextInt(graph.order + 1));
         }

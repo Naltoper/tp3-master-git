@@ -36,15 +36,16 @@ public class RandomMinWeight {
             }
         }
     }
-    
+
+    // TODO faire un parcour sur les poids et donner l'arbre couvrant
+    // Note: The second step (finding the MST) would require an implementation 
+    // of Kruskal's or Prim's algorithm, which is not present in the provided code.
+    // For Kruskal's, you would sort all edges by their new weight [cite: 3] 
+    // and then use a Disjoint Set Union (DSU) structure to build the tree.
+  
 public static ArrayList<Arc> generateTree(Graph graph, int root) {
         RandomMinWeight algo = new RandomMinWeight(graph);
         algo.assignRandomWeights();
         return algo.tree;
     }
-
-    // Note: The second step (finding the MST) would require an implementation 
-    // of Kruskal's or Prim's algorithm, which is not present in the provided code.
-    // For Kruskal's, you would sort all edges by their new weight [cite: 3] 
-    // and then use a Disjoint Set Union (DSU) structure to build the tree.
-}
+}    
