@@ -16,5 +16,9 @@ public class Arc {
 	public int getDest() {
 		return (reversed ? support.getSource() : support.getDest());
 	}
+
+	public Edge getSupport() {
+		return this.support;
+	}
 	
 }
