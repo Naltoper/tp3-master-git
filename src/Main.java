@@ -1,7 +1,6 @@
 import Graph.*;
 import GraphClasses.*;
-import RandomTreeAlgos.BreadthFirstSearch;
-import RandomTreeAlgos.RandomBreadthFirstSearch;
+import RandomTreeAlgos.*;
 import Graphics.*;
 
 import java.io.IOException;
@@ -65,13 +64,20 @@ public class Main {
         
         ArrayList<Arc> randomArcTree;
 
-        // random BFS
-        if(argv.length > 0 && argv[0].equals("-a")){
+        /* Choix de l'algo utilisé */
+        if(argv.length > 0 && argv[0].equals("-b")){
+            // random BFS
             randomArcTree =
-                RandomBreadthFirstSearch.generateTree(graph, new Random().nextInt(graph.order + 1));
+                RandomBreadthFirstSearch.generateTree(graph, new Random().nextInt(graph.order + 1));  
         }
-        // non random BFS
+        else if (argv.length > 0 && argv[0].equals("-m")) {
+             // random minWeight tree
+            randomArcTree =
+                RandomMinWeight.generateTree(graph, new Random().nextInt(graph.order + 1));
+        }
+
         else {
+            // Non random BFS
             randomArcTree =
                 BreadthFirstSearch.generateTree(graph, new Random().nextInt(graph.order + 1));
         }

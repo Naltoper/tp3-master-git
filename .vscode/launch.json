@@ -14,17 +14,17 @@
         },
         {
             "type": "java",
-            "name": "Launch argv -a",
-            "request": "launch",
-            "mainClass": "",
-            "args": ["-a"]
-        },
-        {
-            "type": "java",
-            "name": "Launch argv -b",
+            "name": "-b",
             "request": "launch",
             "mainClass": "",
             "args": ["-b"]
+        },
+        {
+            "type": "java",
+            "name": "-m",
+            "request": "launch",
+            "mainClass": "",
+            "args": ["-m"]
         },
 
 
