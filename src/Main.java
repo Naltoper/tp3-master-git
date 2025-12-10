@@ -1,7 +1,9 @@
 import Graph.*;
 import GraphClasses.*;
+import RandomTreeAlgos.AldousBroder;
 import RandomTreeAlgos.BreadthFirstSearch;
 import RandomTreeAlgos.RandomBreadthFirstSearch;
+import RandomTreeAlgos.RandomEdgeInsertion;
 import Graphics.*;
 
 import java.io.IOException;
@@ -74,12 +76,21 @@ public class Main {
         ArrayList<Arc> randomArcTree1 =
                 RandomBreadthFirstSearch.generateTree(graph, new Random().nextInt(graph.order + 1));
 
+        // random edge insertion
+        ArrayList<Arc> randomArcTree2 = 
+                RandomEdgeInsertion.generateTree(graph, 0);
+
+        // aldous broder
+        ArrayList<Arc> randomArcTree3 =
+            AldousBroder.generateTree(graph, 0);
+
+
         if(argv.length > 0 && argv[0].equals("-a")){
             System.out.println("OOOOOOOOOOOOOOOOOO");
         }
 
         randomTree = new ArrayList<>();
-        for (Arc a : randomArcTree1) randomTree.add(a.support);
+        for (Arc a : randomArcTree3) randomTree.add(a.support);
         return randomTree;
     }
 
