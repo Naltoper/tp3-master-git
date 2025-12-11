@@ -75,6 +75,16 @@ public class Main {
             randomArcTree =
                 RandomMinWeight.generateTree(graph, new Random().nextInt(graph.order + 1));
         }
+        else if (argv.length > 0 && argv[0].equals("-a")) {
+             // random minWeight tree
+            randomArcTree =
+                AldousBroder.generateTree(graph, new Random().nextInt(graph.order + 1));
+        } 
+        else if (argv.length > 0 && argv[0].equals("-e")) {
+             // random minWeight tree
+            randomArcTree =
+                RandomEdgeInsertion.generateTree(graph, new Random().nextInt(graph.order + 1));
+        } 
 
         else {
             // Non random BFS
