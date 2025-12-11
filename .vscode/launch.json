@@ -10,6 +10,13 @@
             "name": "Main",
             "request": "launch",
             "mainClass": "Main",
+            "projectName": "tp3-master-git_5af22d19"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
             "projectName": "tp3-master-git_8df6f921"
         },
         {
