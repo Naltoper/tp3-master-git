@@ -20,13 +20,14 @@ public class Main {
 
     public static void main(String argv[]) throws InterruptedException {
 
-        Graph graph = chooseFromGraphFamily(argv);
+
+        Graph graph = chooseFromGraphFamily(getArg1(argv)); // Ajout de parametre
         ArrayList<Edge> randomTree = null;
 
         int noOfSamples = 10;
         Stats stats = new Stats(noOfSamples);
         for (int i = 0; i < noOfSamples; i++) {
-            randomTree = genTree(graph, argv); // Ajout de parametre
+            randomTree = genTree(graph, getArg0(argv)); // Ajout de parametre 
             stats.update(randomTree);
         }
         stats.print();
@@ -34,27 +35,43 @@ public class Main {
         if (grid != null) showGrid(grid, randomTree);
     }
 
+    public static String getArg0(String argv[]) {
+        String arg0 = "";
+        if (argv.length > 0) {
+            arg0 = argv[0];
+        }
+        return arg0;
+    }
+
+    public static String getArg1(String argv[]) {
+        String arg1 = "";
+        if (argv.length > 1) {
+            arg1 = argv[1];
+        }
+        return arg1;
+    }
+
     /**
      * permet de choisir quel graph utiliser
      */
-    private static Graph chooseFromGraphFamily(String argv[]) {
-        // Parametriser ici cette fonction afin de pouvoir choisir
-        // quelle classe de graphe utiliser
+    private static Graph chooseFromGraphFamily(String arg1) {
         Graph graph = null;
 
-        if (argv.length > 1 && argv[1].equals("-C")) {
-             graph = new Complete(400).graph;
-        }
-        else if (argv.length > 1 && argv[1].equals("-E")) {
-             graph = new ErdosRenyi(1_000, 100).graph;
-        }
-        else if (argv.length > 1 && argv[1].equals("-L")) {
-             graph = new Lollipop(1_000).graph;
-        }
-        else {
+        switch (arg1) {
+        case "-C":
+            graph = new Complete(400).graph;
+            break;
+        case "-E":
+            graph = new ErdosRenyi(1_000, 100).graph;
+            break;
+        case "-L":
+            graph = new Lollipop(1_000).graph;
+            break;
+        default:
             grid = new Grid(1920 / 11, 1080 / 11);
             graph = grid.graph;
-        }
+            break;
+    }
 
         return graph;
     }
@@ -64,36 +81,29 @@ public class Main {
      * @param graph
      * @param 
      */
-    public static ArrayList<Edge> genTree(Graph graph, String argv[]) {
+    public static ArrayList<Edge> genTree(Graph graph, String arg0) {
         ArrayList<Edge> randomTree;
-
-        // modifier l'algorithme utilisé ici
-        // ou bien parametriser à l'aide de la ligne de commande (avec les argv)
-        // TODO faire une classe option pour ne pas voir de switch
-
         
         ArrayList<Arc> randomArcTree;
-    int startNode = new Random().nextInt(graph.order + 1);
+        int startNode = new Random().nextInt(graph.order + 1);
 
-    String arg = (argv.length > 0) ? argv[0] : "";
-
-    switch (arg) {
-        case "-b":
-            randomArcTree = RandomBreadthFirstSearch.generateTree(graph, startNode);
-            break;
-        case "-m":
-            randomArcTree = RandomMinWeight.generateTree(graph, startNode);
-            break;
-        case "-a":
-            randomArcTree = AldousBroder.generateTree(graph, startNode);
-            break;
-        case "-e":
-            randomArcTree = RandomEdgeInsertion.generateTree(graph, startNode);
-            break;
-        default:
-            randomArcTree = BreadthFirstSearch.generateTree(graph, startNode);
-            break;
-    }
+        switch (arg0) {
+            case "-b":
+                randomArcTree = RandomBreadthFirstSearch.generateTree(graph, startNode);
+                break;
+            case "-m":
+                randomArcTree = RandomMinWeight.generateTree(graph, startNode);
+                break;
+            case "-a":
+                randomArcTree = AldousBroder.generateTree(graph, startNode);
+                break;
+            case "-e":
+                randomArcTree = RandomEdgeInsertion.generateTree(graph, startNode);
+                break;
+            default:
+                randomArcTree = BreadthFirstSearch.generateTree(graph, startNode);
+                break;
+        }
 
         randomTree = new ArrayList<>();
         for (Arc a : randomArcTree) randomTree.add(a.support);
