@@ -20,7 +20,7 @@ public class Main {
 
     public static void main(String argv[]) throws InterruptedException {
 
-        Graph graph = chooseFromGraphFamily();
+        Graph graph = chooseFromGraphFamily(argv);
         ArrayList<Edge> randomTree = null;
 
         int noOfSamples = 10;
@@ -37,15 +37,25 @@ public class Main {
     /**
      * permet de choisir quel graph utiliser
      */
-    private static Graph chooseFromGraphFamily() {
+    private static Graph chooseFromGraphFamily(String argv[]) {
         // Parametriser ici cette fonction afin de pouvoir choisir
         // quelle classe de graphe utiliser
+        Graph graph = null;
 
-        grid = new Grid(1920 / 11, 1080 / 11);
-        Graph graph = grid.graph;
-        //Graph graph = new Complete(400).graph;
-        //Graph graph = new ErdosRenyi(1_000, 100).graph;
-        //Graph graph = new Lollipop(1_000).graph;
+        if (argv.length > 0 && argv[1].equals("-C")) {
+             //graph = new Complete(400).graph;
+        }
+        else if (argv.length > 0 && argv[1].equals("-E")) {
+             //graph = new ErdosRenyi(1_000, 100).graph;
+        }
+        else if (argv.length > 0 && argv[1].equals("-L")) {
+             //graph = new Lollipop(1_000).graph;
+        }
+        else {
+            grid = new Grid(1920 / 11, 1080 / 11);
+            graph = grid.graph;
+        }
+
         return graph;
     }
 
@@ -150,7 +160,7 @@ public class Main {
     }
 
     /**
-     *  affiche le labyrinth super cool ?
+     *  affiche le labyrinth
      */
     private static void showGrid(
             Grid grid,
