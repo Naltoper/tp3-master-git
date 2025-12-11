@@ -42,7 +42,6 @@ public class Main {
         // quelle classe de graphe utiliser
         Graph graph = null;
 
-        //TODO add config vs code
         if (argv.length > 1 && argv[1].equals("-C")) {
              graph = new Complete(400).graph;
         }
@@ -74,34 +73,27 @@ public class Main {
 
         
         ArrayList<Arc> randomArcTree;
+    int startNode = new Random().nextInt(graph.order + 1);
 
-        /* Choix de l'algo utilisé */
-        if(argv.length > 0 && argv[0].equals("-b")){
-            // random BFS
-            randomArcTree =
-                RandomBreadthFirstSearch.generateTree(graph, new Random().nextInt(graph.order + 1));  
-        }
-        else if (argv.length > 0 && argv[0].equals("-m")) {
-             // random minWeight tree
-            randomArcTree =
-                RandomMinWeight.generateTree(graph, new Random().nextInt(graph.order + 1));
-        }
-        else if (argv.length > 0 && argv[0].equals("-a")) {
-             // random minWeight tree
-            randomArcTree =
-                AldousBroder.generateTree(graph, new Random().nextInt(graph.order + 1));
-        } 
-        else if (argv.length > 0 && argv[0].equals("-e")) {
-             // random minWeight tree
-            randomArcTree =
-                RandomEdgeInsertion.generateTree(graph, new Random().nextInt(graph.order + 1));
-        } 
+    String arg = (argv.length > 0) ? argv[0] : "";
 
-        else {
-            // Non random BFS
-            randomArcTree =
-                BreadthFirstSearch.generateTree(graph, new Random().nextInt(graph.order + 1));
-        }
+    switch (arg) {
+        case "-b":
+            randomArcTree = RandomBreadthFirstSearch.generateTree(graph, startNode);
+            break;
+        case "-m":
+            randomArcTree = RandomMinWeight.generateTree(graph, startNode);
+            break;
+        case "-a":
+            randomArcTree = AldousBroder.generateTree(graph, startNode);
+            break;
+        case "-e":
+            randomArcTree = RandomEdgeInsertion.generateTree(graph, startNode);
+            break;
+        default:
+            randomArcTree = BreadthFirstSearch.generateTree(graph, startNode);
+            break;
+    }
 
         randomTree = new ArrayList<>();
         for (Arc a : randomArcTree) randomTree.add(a.support);
