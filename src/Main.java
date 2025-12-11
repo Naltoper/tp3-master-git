@@ -42,13 +42,13 @@ public class Main {
         // quelle classe de graphe utiliser
         Graph graph = null;
 
-        if (argv.length > 0 && argv[1].equals("-C")) {
+        if (argv.length > 1 && argv[1].equals("-C")) {
              //graph = new Complete(400).graph;
         }
-        else if (argv.length > 0 && argv[1].equals("-E")) {
+        else if (argv.length > 1 && argv[1].equals("-E")) {
              //graph = new ErdosRenyi(1_000, 100).graph;
         }
-        else if (argv.length > 0 && argv[1].equals("-L")) {
+        else if (argv.length > 1 && argv[1].equals("-L")) {
              //graph = new Lollipop(1_000).graph;
         }
         else {
