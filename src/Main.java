@@ -42,14 +42,15 @@ public class Main {
         // quelle classe de graphe utiliser
         Graph graph = null;
 
+        //TODO add config vs code
         if (argv.length > 1 && argv[1].equals("-C")) {
-             //graph = new Complete(400).graph;
+             graph = new Complete(400).graph;
         }
         else if (argv.length > 1 && argv[1].equals("-E")) {
-             //graph = new ErdosRenyi(1_000, 100).graph;
+             graph = new ErdosRenyi(1_000, 100).graph;
         }
         else if (argv.length > 1 && argv[1].equals("-L")) {
-             //graph = new Lollipop(1_000).graph;
+             graph = new Lollipop(1_000).graph;
         }
         else {
             grid = new Grid(1920 / 11, 1080 / 11);

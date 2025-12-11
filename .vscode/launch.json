@@ -3,6 +3,22 @@
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
+
+    "inputs": [
+        {
+            "id": "algo",
+            "type": "promptString",
+            "description": "Entrez l'algo a utiliser (-b, -m, -a, -e) pour argv[0]",
+            "default": "" // Valeur par défaut
+        },
+        {
+            "id": "graphType",
+            "type": "promptString",
+            "description": "Entrez le type de graphe (-C, -E, -L) pour argv[1]",
+            "default": "" // Valeur par défaut
+        },
+    ],
+
     "configurations": [
 
         {
@@ -16,29 +32,39 @@
             "type": "java",
             "name": "-b",
             "request": "launch",
-            "mainClass": "",
+            "mainClass": "Main",
             "args": ["-b"]
         },
         {
             "type": "java",
             "name": "-m",
             "request": "launch",
-            "mainClass": "",
+            "mainClass": "Main",
             "args": ["-m"]
         },
         {
             "type": "java",
             "name": "-a",
             "request": "launch",
-            "mainClass": "",
+            "mainClass": "Main",
             "args": ["-a"]
         },
         {
             "type": "java",
             "name": "-e",
             "request": "launch",
-            "mainClass": "",
+            "mainClass": "Main",
             "args": ["-e"]
+        },
+        {
+            "type": "java",
+            "name": "Launch Custom Graph (Ask Args)", // Nom de la nouvelle configuration
+            "request": "launch",
+            "mainClass": "Main",
+            "args": [
+                "${input:algo}", // argv[0]
+                "${input:graphType}", // argv[1]
+            ]
         },
 
 
