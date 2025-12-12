@@ -101,7 +101,7 @@ public class Main {
                 randomArcTree = RandomEdgeInsertion.generateTree(graph, startNode);
                 break;
             default:
-                randomArcTree = BreadthFirstSearch.generateTree(graph, startNode);
+                randomArcTree = RandomBreadthFirstSearch.generateTree(graph, startNode);
                 break;
         }
 

@@ -25,9 +25,43 @@ clean:
 	cd src ; make clean ; make cleanInstall
 	rm *.zip *.jar manifest.*
 
-# Cible qui explique comment executer # TODO afficher la notice et demander au user de choisir les argv
+# Cible qui explique comment executer et demande au user de choisir les argv
 exec: jar
-	java -jar $(JARFILE).jar
+	@echo "==================================================================="
+	@echo "                  Lancement du générateur d'arbres aléatoires"
+	@echo "==================================================================="
+	@echo ""
+	@echo "Options pour l'algorithme (1er argument) :"
+	@echo "   -b   -> Random BFS (par défaut)"
+	@echo "   -e   -> Random Edge Insertion"
+	@echo "   -a   -> Aldous-Broder"
+	@echo "   -m   -> Random Minimum Weight Spanning Tree"
+	@echo ""
+	@echo "Options  pour le type de graphe (2ème argument) :"
+	@echo "   -C   -> Graphe Complete"
+	@echo "   -L   -> Graphe Lollipop"
+	@echo "   -E   -> Graphe Erdos-Renyi"
+	@echo "   (rien) -> Grid (labyrinthe) <- choix par défaut"
+	@echo ""
+	@echo "Exemples :"
+	@echo "   -b -C      -> BFS sur graphe Complete"
+	@echo "   -m         -> Min-Weight sur la grille (labyrinthe coloré)"
+	@echo "   -e -L      -> Edge Insertion sur lollipop"
+	@echo "   (rien)     -> BFS sur la grille"
+	@echo ""
+	@echo "==================================================================="
+	@while true; do \
+	    read -p "Vos arguments (ex: -m -C) ou Entrée pour défaut [-b] : " input; \
+	    args=$$input; \
+	    [ -z "$$args" ] && args=""; \
+	    echo ""; \
+	    echo "→ Lancement avec : java -jar $(JARFILE).jar $$args"; \
+	    java -jar $(JARFILE).jar $$args; \
+	    echo ""; \
+	    read -p "Relancer avec d'autres paramètres ? (y/n) : " rerun; \
+	    echo ""; \
+	    case "$$rerun" in [Nn]*) break;; esac; \
+	done
 
 # Ou autrement
 #exec:
@@ -45,10 +79,6 @@ demo:
 	java -classpath $(INSTALLDIR) $(MAINCLASS) -b -C
 
 # Executer automatiquent les test
-# On s'attend (d'habitude) que pour claque classe MaClasse il y ait une
-# classe TestMaClasse qui verifie le bon comportment de chaque methode de la classe
-# sur au moins une entrée
-# A vous de completer
 test:
 	@echo -e "\n================ TEST ================ : "
 	@echo -e "\nLancement de tous les algo sur des graphs Grid : "
