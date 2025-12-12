@@ -3,6 +3,7 @@ package RandomTreeAlgos;
 import Graph.Arc;
 import Graph.Edge;
 import Graph.Graph;
+import Util.*;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -13,35 +14,13 @@ public class RandomMinWeight {
     private Graph graph;
     private ArrayList<Arc> tree;
     private final static Random gen = new Random();
+    private UnionFind unionFind;
 
     public RandomMinWeight(Graph graph) {
         this.graph = graph;
         this.tree = new ArrayList<Arc>();
+        this.unionFind = new UnionFind(graph.upperBound);
     }
-
-    // Union-Find pour detecter les cycles
-    private int find(int[] parent, int i) {
-        if (parent[i] == i) {
-            return i;
-        }
-        parent[i] = find(parent, parent[i]);
-        return parent[i];
-    }
-
-    /**
-     * @return true si une union a eu lieu (pas de cycle), false sinon.
-     */
-    private boolean union(int[] parent, int x, int y) {
-        int rootX = find(parent, x);
-        int rootY = find(parent, y);
-
-        if (rootX != rootY) {
-            parent[rootX] = rootY;
-            return true;
-        }
-        return false;
-    }
-
 
     public void assignRandomWeights() {
         // Pour chaque sommet on lui donne un poids aleatoire
@@ -90,14 +69,9 @@ public class RandomMinWeight {
     public void doKurskal() {
         ArrayList<Edge> allEdges = getAllSortedEdges();
 
-        // 3. Initialiser la structure DSU (Union-Find)
         int numVertices = graph.order;
-        int[] parent = new int[graph.upperBound];
-        for (int i = 0; i < graph.upperBound; i++) {
-            parent[i] = i; 
-        }
 
-        // 4. Parcourir les arêtes triées et construire le MST
+        // Parcourir les arêtes triées et construire le MST
         int edgesCount = 0;
         
         for (Edge edge : allEdges) {
@@ -109,7 +83,7 @@ public class RandomMinWeight {
             int v = edge.dest;
             
             // Si l'union réussit (pas de cycle)
-            if (union(parent, u, v)) {
+            if (unionFind.union(u, v)) {
                 // On converti en Arc pour l'ajouter au tree
                 Arc arc = new Arc(edge, false); 
                 this.tree.add(arc);
