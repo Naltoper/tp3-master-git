@@ -1,6 +1,8 @@
 package RandomTreeAlgos;
 import Graph.Arc;
 import Graph.Graph;
+import Util.UnionFind;
+
 import java.util.*;
 
 
@@ -9,6 +11,8 @@ public class RandomEdgeInsertion {
     ArrayList<Arc> tree;
     int[] parent;
     int[] rank;
+    private UnionFind unionFind;
+
 
     private RandomEdgeInsertion(Graph graph) {
         this.graph = graph;
@@ -18,30 +22,7 @@ public class RandomEdgeInsertion {
         for (int i = 0; i < graph.order; i++) {
             parent[i] = i;
         }
-    }
-
-    private int find(int x) {
-        if (parent[x] != x) {
-            parent[x] = find(parent[x]);
-        }
-        return parent[x];
-    }
-
-    private boolean union(int x, int y) {
-        int px = find(x);
-        int py = find(y);
-        if (px == py) {
-            return false;
-        }
-        if (rank[px] < rank[py]) {
-            parent[px] = py;
-        } else {
-            parent[py] = px;
-            if (rank[px] == rank[py]) {
-                rank[px]++;
-            }
-        }
-        return true;
+        this.unionFind = new UnionFind(graph.upperBound);
     }
 
     private void generate() {
@@ -60,7 +41,7 @@ public class RandomEdgeInsertion {
         for (Arc e : allEdges) {
             int src = e.getSource();
             int dest = e.getDest();
-            if (union(src, dest)) {
+            if (unionFind.union(src, dest)) {
                 tree.add(e);
             }
             if (tree.size() == graph.order - 1) {
