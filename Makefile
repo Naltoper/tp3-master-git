@@ -26,7 +26,7 @@ clean:
 	rm *.zip *.jar manifest.*
 
 # Cible qui explique comment executer
-exec: $(JARFILE).jar
+exec: jar
 	java -jar $(JARFILE).jar
 
 # Ou autrement
@@ -36,7 +36,17 @@ exec: $(JARFILE).jar
 # Demarre automatiquement une demonstration de votre programme
 # Il faut que cette demo soit convaincante
 demo:
-	java -classpath $(INSTALLDIR) $(MAINCLASS)
+	@echo -e "\n================ DEMO ================ : "
+	@echo -e "\nRandom trees sur graph de type Grid avec Labyrinth : "
+	@echo -e "\n--- Random BFS ---"
+	java -classpath $(INSTALLDIR) $(MAINCLASS) -b
+	@echo -e "\n--- Random Edge Insertion ---"
+	java -classpath $(INSTALLDIR) $(MAINCLASS) -e
+	@echo -e "\nRandom trees sur graph de type Complete et Lolipop"
+	@echo -e "\n--- Random BFS sur graph Complete ---"
+	java -classpath $(INSTALLDIR) $(MAINCLASS) -b -C
+	@echo -e "\n--- Random Edge Insertion sur graph Lolipop ---"
+	java -classpath $(INSTALLDIR) $(MAINCLASS) -e -L 
 
 # Executer automatiquent les test
 # On s'attend (d'habitude) que pour claque classe MaClasse il y ait une
