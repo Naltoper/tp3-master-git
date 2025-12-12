@@ -85,7 +85,7 @@ public class RandomMinWeight {
         return allEdges;
     }
 
-    // TODO faire un parcour sur les poids et donner l'arbre couvrant
+
     // Algo de Kruskal, source YOUTUBE : FAST CODE DEVELOPER, et Gemini
     public void doKurskal() {
         ArrayList<Edge> allEdges = getAllSortedEdges();

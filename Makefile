@@ -50,7 +50,7 @@ demo:
 
 # Executer automatiquent les test
 # On s'attend (d'habitude) que pour claque classe MaClasse il y ait une
-# classe TestMaClasse qui vorifie le bon comportment de chaque methode de la classe
+# classe TestMaClasse qui verifie le bon comportment de chaque methode de la classe
 # sur au moins une entrée
 # A vous de completer
 test:
