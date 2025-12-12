@@ -25,7 +25,7 @@ clean:
 	cd src ; make clean ; make cleanInstall
 	rm *.zip *.jar manifest.*
 
-# Cible qui explique comment executer
+# Cible qui explique comment executer # TODO afficher la notice et demander au user de choisir les argv
 exec: jar
 	java -jar $(JARFILE).jar
 
@@ -54,7 +54,16 @@ demo:
 # sur au moins une entrée
 # A vous de completer
 test:
-	
+	@echo -e "\n================ TEST ================ : "
+	@echo -e "\nLancement de tous les algo sur des graphs Grid : "
+	@echo -e "\n--- Random BFS ---"
+	java -classpath $(INSTALLDIR) $(MAINCLASS) -b
+	@echo -e "\n--- Random Edge Insertion ---"
+	java -classpath $(INSTALLDIR) $(MAINCLASS) -e
+	@echo -e "\n--- Aldous Border ---"
+	java -classpath $(INSTALLDIR) $(MAINCLASS) -a
+	@echo -e "\n--- Random Min Weight ---"
+	java -classpath $(INSTALLDIR) $(MAINCLASS) -m
 
 # Cible pour créer son rendu de tp 
 zip:
