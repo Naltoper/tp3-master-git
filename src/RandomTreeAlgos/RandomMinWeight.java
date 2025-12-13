@@ -59,7 +59,7 @@ public class RandomMinWeight {
         
         // 2. Trier toutes les arêtes (Edge) par poids
         // On trie toujours sur les poids aléatoires
-        allEdges.sort((edge1, edge2) -> Double.compare(edge1.weight, edge2.weight)); // TODO peut etre utiliser des int pour les poids
+        allEdges.sort((edge1, edge2) -> Double.compare(edge1.weight, edge2.weight));
         
         return allEdges;
     }
