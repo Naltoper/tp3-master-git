@@ -41,6 +41,9 @@ public class RandomBreadthFirstSearch {
         pushFrontier2(nextArc.getDest()); // On push dans F2 pour ne pas melanger les niveaux
     }
 
+    /*
+    * Source : Nous meme a partir de la description donner du tp
+     */
     private void bfs(int startingVertex) {
         reached.set(startingVertex);
 		pushFrontier1(startingVertex);

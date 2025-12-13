@@ -25,6 +25,10 @@ public class RandomEdgeInsertion {
         this.unionFind = new UnionFind(graph.upperBound);
     }
 
+    /*
+    * Algo de Kurskal,
+    * Source : cp-algorithms.com et Gemini
+    */
     private void generate() {
         // recuperer toutes les arretes uniques
         ArrayList<Arc> allEdges = new ArrayList<>();
@@ -36,14 +40,18 @@ public class RandomEdgeInsertion {
             }
         }
 
+        // Mélanger aléatoirement la liste des arêtes
         Collections.shuffle(allEdges);
         
+        // Parcourir les arêtes dans l'ordre aléatoire
         for (Arc e : allEdges) {
             int src = e.getSource();
             int dest = e.getDest();
+            // Ajouter l'arête à l'arbre si elle relie deux composantes connexes différentes
             if (unionFind.union(src, dest)) {
                 tree.add(e);
             }
+            // Arrêter dès que l'arbre contient n-1 arêtes
             if (tree.size() == graph.order - 1) {
                 break;
             }

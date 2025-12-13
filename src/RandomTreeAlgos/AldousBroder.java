@@ -22,6 +22,9 @@ public class AldousBroder {
         this.random = new Random();
     }
 
+    /*
+    * Source : A partir de la description du tp et verification avec Gemini
+     */
     private void generateTree(int startingVertex) {
 
         // La marche commence sur le sommet de départ. Il est considéré comme atteint.
@@ -46,7 +49,7 @@ public class AldousBroder {
             // Ajout à l'arbre
             // Si le sommet de destination n'a jamais été atteint
             if (!reached.get(nextVertex)) {
-                // ...alors l'arc qui y mène fait partie de l'arbre couvrant.
+                // alors l'arc qui y mène fait partie de l'arbre couvrant.
                 tree.add(nextArc);
                 reached.set(nextVertex);
                 verticesReachedCount++;
