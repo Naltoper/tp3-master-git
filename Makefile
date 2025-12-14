@@ -25,7 +25,7 @@ clean:
 	cd src ; make clean ; make cleanInstall
 	rm *.zip *.jar manifest.*
 
-# Cible qui explique comment executer et demande au user de choisir les argv
+# Cible qui explique comment executer et demande au user de choisir les argv # TODO add last graphs
 exec: jar
 	@echo "==================================================================="
 	@echo "                  Lancement du générateur d'arbres aléatoires"
@@ -36,6 +36,7 @@ exec: jar
 	@echo "   -e   -> Random Edge Insertion"
 	@echo "   -a   -> Aldous-Broder"
 	@echo "   -m   -> Random Minimum Weight Spanning Tree"
+	@echo "   -w   -> Wilson"
 	@echo ""
 	@echo "Options  pour le type de graphe (2ème argument) :"
 	@echo "   -C   -> Graphe Complete"
@@ -78,7 +79,7 @@ demo:
 	@echo -e "\n--- Random BFS sur graph Complete ---"
 	java -classpath $(INSTALLDIR) $(MAINCLASS) -b -C
 
-# Executer automatiquent les test
+# Executer automatiquent les test # TODO add last graphs
 test:
 	@echo -e "\n================ TEST ================ : "
 	@echo -e "\nLancement de tous les algo sur des graphs Grid : "
@@ -90,6 +91,10 @@ test:
 	java -classpath $(INSTALLDIR) $(MAINCLASS) -a
 	@echo -e "\n--- Random Min Weight ---"
 	java -classpath $(INSTALLDIR) $(MAINCLASS) -m
+	@echo -e "\n--- Wilson ---"
+	java -classpath $(INSTALLDIR) $(MAINCLASS) -w
+	@echo -e "\n--- Random Successive Flip ---"
+	java -classpath $(INSTALLDIR) $(MAINCLASS) -f
 
 # Cible pour créer son rendu de tp 
 zip:

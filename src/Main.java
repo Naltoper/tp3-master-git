@@ -69,7 +69,7 @@ public class Main {
             break;
         default:
             grid = new Grid(1920 / 11, 1080 / 11);
-            graph = grid.graph;
+            graph = grid.graph; 
             break;
     }
 
@@ -99,6 +99,15 @@ public class Main {
                 break;
             case "-e":
                 randomArcTree = RandomEdgeInsertion.generateTree(graph, startNode);
+                break;
+            case "-ec": // TODO changer d'algo
+                randomArcTree = RandomEdgeContraction.generateTree(graph, startNode);
+                break;
+            case "-f":
+                randomArcTree = RandomFlip.generateTree(graph, startNode, 10000);
+                break;
+            case "-w":
+                randomArcTree = Wilson.generateTree(graph, startNode);
                 break;
             default:
                 randomArcTree = RandomBreadthFirstSearch.generateTree(graph, startNode);

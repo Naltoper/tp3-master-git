@@ -19,7 +19,7 @@ public class Wilson {
      * * @param graph Le graphe sur lequel construire l'arbre.
      * @return La liste des arcs constituant l'arbre.
      */
-    public static ArrayList<Arc> generateTree(Graph graph) {
+    public static ArrayList<Arc> generateTree(Graph graph, int root) {
         ArrayList<Arc> tree = new ArrayList<>();
         BitSet inTree = new BitSet(graph.upperBound); // Marque les sommets déjà dans l'arbre
         
@@ -30,8 +30,8 @@ public class Wilson {
         
         Random random = new Random();
         
-        // 1. Choisir un sommet initial v (de préférence de degré maximum)
-        int root = -1;
+        // 1. Choisir un sommet initial v (de préférence de degré maximum pour de meilleurs performances)
+        root = -1;
         int maxDegree = -1;
         
         // On parcourt tous les sommets valides pour trouver le max degré
