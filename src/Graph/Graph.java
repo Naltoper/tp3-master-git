@@ -1,7 +1,9 @@
 package Graph;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 
 
 public class Graph {
@@ -64,9 +66,27 @@ public class Graph {
         this.order = Math.max(this.order, vertex + 1);
     }
 
-    public void deleteVertex(int vertex){
-        // à compléter
+   public void deleteVertex(int vertex) {
+        if (!isVertex(vertex)) {
+            return; // Vertex doesn't exist or already deleted
+        }
         
+        // Remove all incident edges (undirected)
+        LinkedList<Edge> edgesToRemove = new LinkedList<>(incidency.get(vertex));
+        for (Edge edge : edgesToRemove) {
+            // Remove edge from the other endpoint's incidency list
+            int otherVertex = edge.oppositeExtremity(vertex);
+            incidency.get(otherVertex).remove(edge);
+            edgeCardinality--;
+        }
+        
+        // Clear all adjacency lists for this vertex
+        incidency.get(vertex).clear();
+        inIncidency.get(vertex).clear();
+        outIncidency.get(vertex).clear();
+        
+        // Decrement order (number of active vertices)
+        order--;
     }
 
     public void ensureVertex(int vertex) {
@@ -121,5 +141,19 @@ public class Graph {
         // https://www.baeldung.com/java-collection-toarray-methods
         return outIncidency.get(vertex).toArray(new Arc[0]);
    }
+
+
+
+    public ArrayList<Edge> getAllEdges() {
+        Set<Edge> edges = new HashSet<>();
+        for (int i = 0; i < upperBound; i++) {
+            if (isVertex(i)) {
+                for (Edge e : incidency.get(i)) {
+                    edges.add(e);
+                }
+            }
+        }
+        return new ArrayList<>(edges);
+}
 
 }

@@ -2,7 +2,7 @@ package Graph;
 
 public class Arc {
 	public Edge support;
-	boolean reversed;
+	public boolean reversed;
 	
 	public Arc(Edge e, boolean reversed) {
 		this.support = e;
