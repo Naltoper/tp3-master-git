@@ -102,9 +102,9 @@ test:
 
 # Cible pour créer son rendu de tp 
 zip:
-	moi=$$(whoami) ; zip -r $${moi}_renduTP2.zip *
+	moi=FABRETTI_Florent_FABRETTI_Vincent ; zip -r $$TP2_{moi}.zip *
 
 
 # Cible pour vérifier le contenu de son rendu de tp 
 zipVerify:
-	moi=$$(whoami) ; unzip -l $${moi}_renduTP2.zip
+	moi=FABRETTI_Florent_FABRETTI_Vincent ; unzip -l $$TP2_{moi}.zip
