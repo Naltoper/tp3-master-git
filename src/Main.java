@@ -100,11 +100,11 @@ public class Main {
             case "-e":
                 randomArcTree = RandomEdgeInsertion.generateTree(graph, startNode);
                 break;
-            case "-ec": // TODO changer d'algo
-                randomArcTree = RandomEdgeContraction.generateTree(graph, startNode);
+            case "-p":
+                randomArcTree = RandomPrim.generateTree(graph, startNode);
                 break;
             case "-f":
-                randomArcTree = RandomFlip.generateTree(graph, startNode, 10000);
+                randomArcTree = RandomFlip.generateTree(graph, startNode, 1000);
                 break;
             case "-w":
                 randomArcTree = Wilson.generateTree(graph, startNode);

@@ -38,6 +38,7 @@ FABRETTI Florent, FABRETTI Vincent
 	-   -a   -> Aldous-Broder
 	-   -m   -> Random Minimum Weight Spanning Tree
 	-   -w   -> Wilson
+	-   -p   -> Random Prim
 
 2.  Options  pour le type de graphe (2ème argument) :
 	-   -C   -> Graphe Complete
@@ -52,67 +53,114 @@ FABRETTI Florent, FABRETTI Vincent
 	-   (rien)     -> BFS sur la grille
 
 
-#### Comparaisons des algorithmes
-Les tests ont été effectués sur 10 échantillons pour chaque algorithme.
+# Comparaisons des algorithmes
 
-Résultats :
 
-- Random BFS (-b)
-  Excentricité moyenne : 87.26
-  Indice de Wiener       : 21 898 474 120
-  Diamètre               : 358
-  Feuilles               : 4326
-  Degré 2                : 8464
-  Temps                  : 26 ms
+Les expériences ont été réalisées sur des graphes grille de taille 100 × 100 (10 000 sommets, environ 20 000 arêtes). Pour chaque algorithme, 10 arbres couvrants aléatoires ont été générés, et les métriques suivantes ont été calculées via la classe `RootedTree` (arbre enraciné en son centre) :
 
-- Random Edge Insertion (-e)
-  Excentricité moyenne : 88.50
-  Indice de Wiener       : 21 925 036 707
-  Diamètre               : 366
-  Feuilles               : 4337
-  Degré 2                : 8446
-  Temps                  : 27 ms
+- Excentricité moyenne (average eccentricity) : distance moyenne d’un sommet au centre.
+- Indice de Wiener (Wiener index) : somme des distances entre toutes les paires de sommets.
+- Diamètre (diameter) : plus longue distance entre deux sommets.
+- Nombre moyen de feuilles (degree 1).
+- Nombre moyen de sommets de degré 2.
+- Temps de calcul moyen.
 
-- Aldous-Broder (-a)
-  Excentricité moyenne : 277.38
-  Indice de Wiener       : 58 023 909 847
-  Diamètre               : 1086
-  Feuilles               : 5011
-  Degré 2                : 7635
-  Temps                  : 51 ms
+## Résultats (commande make test)
 
-- Random Min Weight (-m)
-  Excentricité moyenne : 213.64
-  Indice de Wiener       : 46 157 032 238
-  Diamètre               : 787
-  Feuilles               : 5219
-  Degré 2                : 7293
-  Temps                  : 40 ms
+================ TEST ================ : 
 
-- Wilson (-w)
-  Excentricité moyenne : 261.62
-  Indice de Wiener       : 55 262 033 072
-  Diamètre               : 1015
-  Feuilles               : 5023
-  Degré 2                : 7619
-  Temps                  : 38 ms
+Lancement de tous les algo sur des graphs Grid : 
 
-- Random Successive Flip (-f) (Avec un nombre redui de flip car trop trop long sinon)
-  Excentricité moyenne : 1438.63
-  Indice de Wiener       : 253 294 805 511
-  Diamètre               : 5187
-  Feuilles               : 8100
-  Degré 2                : 936
-  Temps                  : 224 ms
+--- Random BFS ---
+java -classpath out/production/TP3 Main -b
+On 10 samples:
+Average eccentricity: 89.44390100867935
+Average wiener index: 22168449638
+Average diameter: 366
+Average number of leaves: 4319
+Average number of degree 2 vertices: 8486
+Average computation time: 30ms
 
-Analyse :
+--- Random Edge Insertion ---
+java -classpath out/production/TP3 Main -e
+On 10 samples:
+Average eccentricity: 205.61137696457894
+Average wiener index: 44159576154
+Average diameter: 790
+Average number of leaves: 5240
+Average number of degree 2 vertices: 7264
+Average computation time: 30ms
 
-Les algorithmes Random BFS et Random Edge Insertion produisent des arbres très similaires, avec les valeurs les plus basses pour l'excentricité, le diamètre et l'indice de Wiener. Ces arbres sont compacts et proches de l'arbre couvrant de distance minimale.
+--- Aldous Border ---
+java -classpath out/production/TP3 Main -a
+On 10 samples:
+Average eccentricity: 237.69551958714518
+Average wiener index: 51100832409
+Average diameter: 934
+Average number of leaves: 4998
+Average number of degree 2 vertices: 7656
+Average computation time: 53ms
 
-Aldous-Broder et Wilson génèrent des arbres plus étirés (diamètre et Wiener environ 2-3 fois plus grands), avec davantage de sommets de degré intermédiaire.
+--- Random Min Weight ---
+java -classpath out/production/TP3 Main -m
+On 10 samples:
+Average eccentricity: 226.85587614356086
+Average wiener index: 47533744080
+Average diameter: 848
+Average number of leaves: 5209
+Average number of degree 2 vertices: 7313
+Average computation time: 40ms
 
-Random Min Weight se situe entre ces deux groupes.
+--- Wilson ---
+java -classpath out/production/TP3 Main -w
+On 10 samples:
+Average eccentricity: 243.49304480412857
+Average wiener index: 52232204916
+Average diameter: 963
+Average number of leaves: 5024
+Average number of degree 2 vertices: 7624
+Average computation time: 37ms
 
-Random Successive Flip produit des arbres extrêmement allongés, avec un diamètre et un indice de Wiener très élevés, beaucoup plus de feuilles et très peu de sommets de degré 2. Le temps de calcul est nettement supérieur.
+**Valeurs a ne pas prendre en compte pour Flip car nombre de flip volontairement reduit**
+--- Random Successive Flip (AVEC NOMBRE DE FLIP REDUIT CAR TROP LONG) ---
+java -classpath out/production/TP3 Main -f
+On 10 samples:
+Average eccentricity: 1663.7695988740325
+Average wiener index: 299262073113
+Average diameter: 6114
+Average number of leaves: 8148
+Average number of degree 2 vertices: 836
+Average computation time: 234ms
 
-Les algorithmes BFS et Edge Insertion sont les plus rapides, suivis de Wilson et Random Min Weight. Aldous-Broder est légèrement plus lent, et Successive Flip est significativement plus coûteux.
+--- Random Prim ---
+java -classpath out/production/TP3 Main -p
+On 10 samples:
+Average eccentricity: 114.53540933614825
+Average wiener index: 27485983033
+Average diameter: 435
+Average number of leaves: 5511
+Average number of degree 2 vertices: 6839
+Average computation time: 33ms
+
+
+## Analyse et considérations
+
+### 1. Uniformité de la distribution aléatoire
+
+- Les algorithmes de **Wilson**, **Random Successive Flip** et **Aldous Border** produisent des arbres couvrants **uniformes**. Leur indice sont asser proches. 
+
+- **Random BFS** et **Random Prim** donnent des arbres beaucoup plus compacts : diamètre 368-405, indice de Wiener 22-25 milliards.  
+  On voit qu'il ne sont pas uniform avec la visualisation du labyrinthe. Ils suivent une logique de parcours par niveaux qui est visualisable.
+
+- Les algorithmes intermédiaires comme **Random Edge Insertion** et **Random Min Weight** sont entre les deux, avec diamètre 870-878. Visuellement on ne voit pas la difference avec un algo uniforme.
+
+
+### 2. Vitesse d'exécution
+
+- Les plus rapides : **Random BFS** (26 ms), **Random Edge Insertion** (29 ms), **Random Prim** (34 ms).
+- Moyennement rapides : **Wilson** (36 ms), **Random Min Weight** (45 ms).
+- Un peu plus lent : **Aldous Border** (54 ms).
+- Beaucoup plus lent : **Random Successive Flip** (204 ms avec un nombre de flip reduit, plusieurs minutes sinon)
+#### Conclusion
+
+- Le meilleur compromis semble etre **Random Edge Insertion** car il est tres rapide est meme si il ne produit pas une distribution parfaitement uniforme, il en est proche et c'est difficilement visualisable.

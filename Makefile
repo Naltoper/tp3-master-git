@@ -37,6 +37,7 @@ exec: jar
 	@echo "   -a   -> Aldous-Broder"
 	@echo "   -m   -> Random Minimum Weight Spanning Tree"
 	@echo "   -w   -> Wilson"
+	@echo "   -p   -> Random Prim"
 	@echo ""
 	@echo "Options  pour le type de graphe (2ème argument) :"
 	@echo "   -C   -> Graphe Complete"
@@ -93,8 +94,10 @@ test:
 	java -classpath $(INSTALLDIR) $(MAINCLASS) -m
 	@echo -e "\n--- Wilson ---"
 	java -classpath $(INSTALLDIR) $(MAINCLASS) -w
-	@echo -e "\n--- Random Successive Flip ---"
+	@echo -e "\n--- Random Successive Flip (AVEC NOMBRE DE FLIP REDUIT CAR TROP LONG) ---"
 	java -classpath $(INSTALLDIR) $(MAINCLASS) -f
+	@echo -e "\n--- Random Prim ---"
+	java -classpath $(INSTALLDIR) $(MAINCLASS) -p
 
 # Cible pour créer son rendu de tp 
 zip:
