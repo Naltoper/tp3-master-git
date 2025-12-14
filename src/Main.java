@@ -3,10 +3,9 @@ import GraphClasses.*;
 import RandomTreeAlgos.AldousBroder;
 import RandomTreeAlgos.BreadthFirstSearch;
 import RandomTreeAlgos.RandomBreadthFirstSearch;
-import RandomTreeAlgos.RandomEdgeContraction;
-import RandomTreeAlgos.RandomEdgeContraction;
 import RandomTreeAlgos.RandomEdgeInsertion;
 import RandomTreeAlgos.RandomFlip;
+import RandomTreeAlgos.RandomPrim;
 import RandomTreeAlgos.Wilson;
 import Graphics.*;
 
@@ -88,17 +87,17 @@ public class Main {
         // ArrayList<Arc> randomArcTree3 =
         //     AldousBroder.generateTree(graph, 0);
 
-        // // random contraction (lent)
-        // ArrayList<Arc> randomArcTree4 =
-        //     RandomEdgeContraction.generateTree(graph, 0);
+        // random contraction (lent)
+        ArrayList<Arc> randomArcTree4 =
+            RandomPrim.generateTree(graph, 0);
 
         // // wilson
         // ArrayList<Arc> randomArcTree5 =
         //     Wilson.generateTree(graph);
 
-        // RandomFlips
-        ArrayList<Arc> randomArcTree6 =
-            RandomFlip.generateTree(graph, 0,10000);
+        // // RandomFlips
+        // ArrayList<Arc> randomArcTree6 =
+        //     RandomFlip.generateTree(graph, 0,10000);
 
             
 
@@ -108,7 +107,7 @@ public class Main {
         }
 
         randomTree = new ArrayList<>();
-        for (Arc a : randomArcTree6) randomTree.add(a.support);
+        for (Arc a : randomArcTree4) randomTree.add(a.support);
         return randomTree;
     }
 
