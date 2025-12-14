@@ -102,9 +102,9 @@ test:
 
 # Cible pour créer son rendu de tp 
 zip:
-	moi=FABRETTI_Florent_FABRETTI_Vincent ; zip -r $$TP2_{moi}.zip *
+	zip -r TP2_FABRETTI_Florent_FABRETTI_Vincent.zip *
 
 
 # Cible pour vérifier le contenu de son rendu de tp 
 zipVerify:
-	moi=FABRETTI_Florent_FABRETTI_Vincent ; unzip -l $$TP2_{moi}.zip
+	unzip -l TP2_FABRETTI_Florent_FABRETTI_Vincent.zip
