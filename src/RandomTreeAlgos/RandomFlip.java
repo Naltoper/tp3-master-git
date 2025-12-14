@@ -6,9 +6,7 @@ import Graph.Graph;
 import java.util.*;
 
 /**
- * Produit un arbre couvrant aléatoire par flips successifs (Optimisé).
- * Utilise une table de hachage pour un accès rapide aux arcs et gère
- * explicitement les enfants de la racine pour accélérer l'opération flip.
+ * Produit un arbre couvrant aléatoire par flips successifs
  */
 public class RandomFlip {
 
@@ -17,12 +15,8 @@ public class RandomFlip {
     Arc[] parentArc;
     int root;
     Random random;
-
-    // Nouvelle structure pour un accès O(1) à l'arc (source -> dest)
-    // Map<Source, Map<Dest, Arc>>
     private Map<Integer, Map<Integer, Arc>> arcMap;
 
-    // Nouvelle structure pour un accès rapide aux enfants de la racine
     private Set<Integer> rootChildren;
 
     private RandomFlip(Graph graph) {
@@ -32,7 +26,7 @@ public class RandomFlip {
         this.random = new Random();
         this.rootChildren = new HashSet<>();
         this.arcMap = new HashMap<>();
-        buildArcMap(); // Étape d'initialisation rapide
+        buildArcMap();
     }
 
     /**
@@ -51,7 +45,6 @@ public class RandomFlip {
      * Construit un arbre couvrant initial par DFS simple
      */
     private void buildInitialTree(int startingVertex) {
-        // Le corps de cette méthode n'est pas modifié, mais nous remplissons rootChildren
         BitSet visited = new BitSet(graph.order);
         Stack<Integer> stack = new Stack<>();
         
@@ -75,7 +68,7 @@ public class RandomFlip {
                     stack.push(dest);
 
                     if (current == root) {
-                        rootChildren.add(dest); // Ajout optimisé
+                        rootChildren.add(dest); 
                     }
                 }
             }
@@ -87,10 +80,10 @@ public class RandomFlip {
      * puis l'arête sortante de u, et met à jour l'arbre
      */
     private void flip() {
-        // 1. Choisir une arête e = ru incidente à la racine
+        // Choisir une arête e = ru incidente à la racine
         List<Arc> incidentArcs = new ArrayList<>();
         
-        // A. Arcs sortants de la racine (e = root -> u) qui ne sont pas dans l'arbre
+        // Arcs sortants de la racine qui ne sont pas dans l'arbre
         for (Arc arc : graph.outEdges(root)) {
             int u = arc.getDest();
             if (parent[u] != root) { 
@@ -98,8 +91,7 @@ public class RandomFlip {
             }
         }
         
-        // B. Arcs entrants vers la racine (e = u -> root).
-        // On n'itère plus sur tous les sommets (O(|V|)), mais seulement sur les enfants de la racine (O(|V|)).
+        // Arcs entrants vers la racine
         for (int v : rootChildren) {
             // Trouver l'arc v -> root dans le graphe initial
             Arc arc = arcMap.get(v).get(root); 
@@ -114,11 +106,11 @@ public class RandomFlip {
         Arc e = incidentArcs.get(random.nextInt(incidentArcs.size()));
         int u = e.getSource() == root ? e.getDest() : e.getSource();
 
-        // 2. Trouver l'arc sortant de u dans T (arc vers le père de u), ePrime, et la racine R.
+        // Trouver l'arc sortant de u dans T (arc vers le père de u), ePrime, et la racine R.
         int R = root;
         if (parent[u] == -1) return; 
 
-        // 3. Mettre à jour T : Inversion du chemin de u vers l'ancienne racine R
+        // Mettre à jour T : Inversion du chemin de u vers l'ancienne racine R
         int current = u;
         int prev = -1;
         int nextParent;
@@ -144,7 +136,7 @@ public class RandomFlip {
             current = nextParent;
         }
 
-        // 4. Mettre à jour la liaison (ancienne racine -> u)
+        //  Mettre à jour la liaison (ancienne racine -> u)
         // L'ancienne racine R est maintenant l'enfant de u (prev)
         parent[R] = u;
         
@@ -157,9 +149,7 @@ public class RandomFlip {
         // u devient la nouvelle racine
         root = u;
     }
-    
-    // Les autres méthodes restent inchangées...
-    
+        
     /**
      * Effectue numFlips flips successifs
      */

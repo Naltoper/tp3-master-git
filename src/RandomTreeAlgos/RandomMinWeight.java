@@ -41,7 +41,7 @@ public class RandomMinWeight {
     }
 
     public ArrayList<Edge> getAllSortedEdges() {
-        // 1. Collecter toutes les arêtes sous forme d'objets Edge (pas encore Arc)
+        // Collecter toutes les arêtes sous forme d'objets Edge (pas encore Arc)
         ArrayList<Edge> allEdges = new ArrayList<>();
         for (int v = 0; v < graph.upperBound; v++) {
             if (graph.isVertex(v)) {
@@ -57,8 +57,7 @@ public class RandomMinWeight {
             }
         }
         
-        // 2. Trier toutes les arêtes (Edge) par poids
-        // On trie toujours sur les poids aléatoires
+        // Trier toutes les arêtes (Edge) par poids
         allEdges.sort((edge1, edge2) -> Double.compare(edge1.weight, edge2.weight));
         
         return allEdges;

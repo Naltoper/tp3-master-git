@@ -8,29 +8,20 @@ import java.util.BitSet;
 import java.util.Random;
 
 /**
- * Implémentation de l'algorithme de Wilson pour la génération d'arbres 
- * couvrants uniformes (Uniform Spanning Tree).
- * * Principe : Marche aléatoire à effacement de boucles (Loop-Erased Random Walk).
+ * algo de Wilson
  */
 public class Wilson {
 
-    /**
-     * Génère un arbre couvrant aléatoire uniforme.
-     * * @param graph Le graphe sur lequel construire l'arbre.
-     * @return La liste des arcs constituant l'arbre.
-     */
+    // Source : Internet youtube et gemini
     public static ArrayList<Arc> generateTree(Graph graph, int root) {
         ArrayList<Arc> tree = new ArrayList<>();
         BitSet inTree = new BitSet(graph.upperBound); // Marque les sommets déjà dans l'arbre
         
-        // Tableau pour stocker les "marques" du chemin en cours.
-        // nextArc[u] stocke l'arc emprunté par la marche aléatoire depuis u.
-        // C'est ce qui permet l'effacement de cycle simple décrit dans l'énoncé.
         Arc[] nextArc = new Arc[graph.upperBound];
         
         Random random = new Random();
         
-        // 1. Choisir un sommet initial v (de préférence de degré maximum pour de meilleurs performances)
+        // Choisir un sommet initial v (de préférence de degré maximum pour de meilleurs performances)
         root = -1;
         int maxDegree = -1;
         
@@ -52,7 +43,6 @@ public class Wilson {
 
         // Boucle principale : tant que l'arbre ne couvre pas tous les sommets
         // On itère sur tous les sommets possibles pour trouver des 'u' hors de l'arbre.
-        // L'ordre n'importe pas car la marche est aléatoire.
         for (int u = 0; u < graph.upperBound; u++) {
             
             // Si le sommet n'est pas valide ou est déjà dans l'arbre, on passe

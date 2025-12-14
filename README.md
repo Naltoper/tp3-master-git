@@ -1,14 +1,12 @@
 # TP3
 FABRETTI Florent, FABRETTI Vincent
 
-# TODO faire des stats sur les algov
-
 ## Membres du binôme
 - FABRETTI Florent
 - FABRETTI Vincent
 
 
-## Avancement – Algorithmes implémentés (4)
+## Avancement – Algorithmes implémentés (7)
 
  Algorithmes                          
 |-----------------------------
@@ -16,6 +14,9 @@ FABRETTI Florent, FABRETTI Vincent
 - Random Edge Insertion               
 - Aldous-Broder
 - Random Minimum Weight Tree
+- Random Prim
+- Wilson
+- Random Flip
 
 
 ## Comment compiler et exécuter le projet
@@ -55,17 +56,7 @@ FABRETTI Florent, FABRETTI Vincent
 
 # Comparaisons des algorithmes
 
-
-Les expériences ont été réalisées sur des graphes grille de taille 100 × 100 (10 000 sommets, environ 20 000 arêtes). Pour chaque algorithme, 10 arbres couvrants aléatoires ont été générés, et les métriques suivantes ont été calculées via la classe `RootedTree` (arbre enraciné en son centre) :
-
-- Excentricité moyenne (average eccentricity) : distance moyenne d’un sommet au centre.
-- Indice de Wiener (Wiener index) : somme des distances entre toutes les paires de sommets.
-- Diamètre (diameter) : plus longue distance entre deux sommets.
-- Nombre moyen de feuilles (degree 1).
-- Nombre moyen de sommets de degré 2.
-- Temps de calcul moyen.
-
-## Résultats (commande make test)
+- Résultats (commande make test)
 
 ================ TEST ================ : 
 

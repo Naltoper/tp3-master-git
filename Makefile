@@ -25,7 +25,7 @@ clean:
 	cd src ; make clean ; make cleanInstall
 	rm *.zip *.jar manifest.*
 
-# Cible qui explique comment executer et demande au user de choisir les argv # TODO add last graphs
+# Cible qui explique comment executer et demande au user de choisir les argv 
 exec: jar
 	@echo "==================================================================="
 	@echo "                  Lancement du générateur d'arbres aléatoires"
@@ -38,6 +38,7 @@ exec: jar
 	@echo "   -m   -> Random Minimum Weight Spanning Tree"
 	@echo "   -w   -> Wilson"
 	@echo "   -p   -> Random Prim"
+	@echo "   -f   -> Random Flip (avec un nombre de flip reduit car trop long)"
 	@echo ""
 	@echo "Options  pour le type de graphe (2ème argument) :"
 	@echo "   -C   -> Graphe Complete"
@@ -80,7 +81,7 @@ demo:
 	@echo -e "\n--- Random BFS sur graph Complete ---"
 	java -classpath $(INSTALLDIR) $(MAINCLASS) -b -C
 
-# Executer automatiquent les test # TODO add last graphs
+# Executer automatiquent les test
 test:
 	@echo -e "\n================ TEST ================ : "
 	@echo -e "\nLancement de tous les algo sur des graphs Grid : "
