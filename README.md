@@ -1,7 +1,7 @@
 # TP3
 FABRETTI Florent, FABRETTI Vincent
 
-# TODO faire des stats sur les algo
+# TODO faire des stats sur les algov
 
 ## Membres du binôme
 - FABRETTI Florent
@@ -50,3 +50,10 @@ FABRETTI Florent, FABRETTI Vincent
 	-   -e -L      -> Edge Insertion sur lollipop
 	-   (rien)     -> BFS sur la grille
 
+
+## Comparaisons des algorithmes
+Algorithme,Option,Excentricité moyenne,Indice de Wiener moyen,Diamètre moyen,Nb. feuilles moyen,Nb. degré 2 moyen,Temps moyen (ms)
+Random BFS,-b,83.13,20 256 059 000,335,4345,8431,27
+Random Edge Insertion,-e,216.63,45 851 000 000,791,5193,7349,32
+Aldous-Broder,-a,234.55,50 050 000 000,921,5018,7634,66
+Random Min Weight,-m,202.33,43 924 000 000,802,5226,7285,45 # TODO
