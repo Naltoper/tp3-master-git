@@ -6,7 +6,7 @@ import RandomTreeAlgos.RandomBreadthFirstSearch;
 import RandomTreeAlgos.RandomEdgeContraction;
 import RandomTreeAlgos.RandomEdgeContraction;
 import RandomTreeAlgos.RandomEdgeInsertion;
-import RandomTreeAlgos.RandomFlips;
+import RandomTreeAlgos.RandomFlip;
 import RandomTreeAlgos.Wilson;
 import Graphics.*;
 
@@ -98,7 +98,7 @@ public class Main {
 
         // RandomFlips
         ArrayList<Arc> randomArcTree6 =
-            RandomFlips.generateTree(graph, 0, 0);
+            RandomFlip.generateTree(graph, 0,10000);
 
             
 

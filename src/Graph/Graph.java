@@ -114,18 +114,18 @@ public class Graph {
     }
 
     public void addEdge(Edge edge) {
-        // à compléter
+        // NOUVEAU: Assurer que les sommets source et dest sont dans la plage valide
+        ensureVertex(edge.source);
+        ensureVertex(edge.dest);
+        
         // Ajouter à la liste d'incidency non orientée
         incidency.get(edge.source).add(edge);
         incidency.get(edge.dest).add(edge);
 
         // Creer et ajouter deux arces orientés
-
-        // Arc1 source -> dest
         Arc arc1 = new Arc(edge, false);
         addArc(arc1);
-
-        // Arc2 dest -> source
+        
         Arc arc2 = new Arc(edge, true);
         addArc(arc2);
 
