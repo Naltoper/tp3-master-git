@@ -3,7 +3,11 @@ import GraphClasses.*;
 import RandomTreeAlgos.AldousBroder;
 import RandomTreeAlgos.BreadthFirstSearch;
 import RandomTreeAlgos.RandomBreadthFirstSearch;
+import RandomTreeAlgos.RandomEdgeContraction;
+import RandomTreeAlgos.RandomEdgeContraction;
 import RandomTreeAlgos.RandomEdgeInsertion;
+import RandomTreeAlgos.RandomFlips;
+import RandomTreeAlgos.Wilson;
 import Graphics.*;
 
 import java.io.IOException;
@@ -68,21 +72,35 @@ public class Main {
         // TODO ou bien parametriser à l'aide de la ligne de commande (avec les argv)
         // TODO faire une classe option pour ne pas voir de switch
 
-        // non random BFS
-        ArrayList<Arc> randomArcTree0 =
-                BreadthFirstSearch.generateTree(graph, new Random().nextInt(graph.order + 1));
+        // // non random BFS
+        // ArrayList<Arc> randomArcTree0 =
+        //         BreadthFirstSearch.generateTree(graph, new Random().nextInt(graph.order + 1));
 
-        // random BFS
-        ArrayList<Arc> randomArcTree1 =
-                RandomBreadthFirstSearch.generateTree(graph, new Random().nextInt(graph.order + 1));
+        // // random BFS
+        // ArrayList<Arc> randomArcTree1 =
+        //         RandomBreadthFirstSearch.generateTree(graph, new Random().nextInt(graph.order + 1));
 
-        // random edge insertion
-        ArrayList<Arc> randomArcTree2 = 
-                RandomEdgeInsertion.generateTree(graph, 0);
+        // // random edge insertion
+        // ArrayList<Arc> randomArcTree2 = 
+        //         RandomEdgeInsertion.generateTree(graph, 0);
 
-        // aldous broder
-        ArrayList<Arc> randomArcTree3 =
-            AldousBroder.generateTree(graph, 0);
+        // // aldous broder
+        // ArrayList<Arc> randomArcTree3 =
+        //     AldousBroder.generateTree(graph, 0);
+
+        // // random contraction (lent)
+        // ArrayList<Arc> randomArcTree4 =
+        //     RandomEdgeContraction.generateTree(graph, 0);
+
+        // // wilson
+        // ArrayList<Arc> randomArcTree5 =
+        //     Wilson.generateTree(graph);
+
+        // RandomFlips
+        ArrayList<Arc> randomArcTree6 =
+            RandomFlips.generateTree(graph, 0, 0);
+
+            
 
 
         if(argv.length > 0 && argv[0].equals("-a")){
@@ -90,7 +108,7 @@ public class Main {
         }
 
         randomTree = new ArrayList<>();
-        for (Arc a : randomArcTree3) randomTree.add(a.support);
+        for (Arc a : randomArcTree6) randomTree.add(a.support);
         return randomTree;
     }
 
